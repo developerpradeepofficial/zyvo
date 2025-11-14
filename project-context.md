@@ -1,97 +1,63 @@
-# LocalBusinessOS - Complete Development Documentation
+# LocalBusinessOS - Complete Development Guide (Using Refine)
+## Build Your MVP in 1 WEEK Instead of 8 Weeks!
 
-## Simple Step-by-Step Guide to Build Your MVP
+**Target:** Working production app in 7 days  
+**Cost:** ₹0 (100% free, open source)  
+**Result:** Web app that works like mobile app (PWA) with 10+ paying customers
 
-**Target:** Working MVP in 8 weeks (part-time, 20-30 hours/week)  
-**Cost:** ₹0-₹10,000 total  
-**Result:** Production-ready app with 10+ paying customers
+---
+
+## 🎯 WHY REFINE?
+
+### Without Refine (Custom Build):
+- ⏰ 8 weeks to build
+- 😰 Write 5,000+ lines of code
+- 🐛 Many bugs to fix
+- 📚 Complex setup
+
+### With Refine (Boilerplate):
+- ⏰ 1 week to launch
+- ✅ 90% code already written
+- 🚀 Production-ready
+- 🎁 Everything included
+
+**Refine gives you:**
+- ✅ Authentication (login/signup) - DONE
+- ✅ CRUD operations - DONE
+- ✅ Forms with validation - DONE
+- ✅ Tables with filtering - DONE
+- ✅ Dashboard - DONE
+- ✅ Routing - DONE
+- ✅ TypeScript - DONE
+- ✅ UI components - DONE
+
+**You just customize for your business!**
 
 ---
 
 ## 📋 TABLE OF CONTENTS
 
-1. [Project Overview](#1-project-overview)
-2. [Prerequisites & Setup](#2-prerequisites--setup)
-3. [Week 1-2: Database & Backend Foundation](#3-week-1-2-database--backend-foundation)
-4. [Week 3-4: Core APIs](#4-week-3-4-core-apis)
-5. [Week 5-6: Mobile App](#5-week-5-6-mobile-app)
-6. [Week 7-8: Voice & Testing](#6-week-7-8-voice--testing)
-7. [Deployment](#7-deployment)
-8. [Getting First Customers](#8-getting-first-customers)
+1. [Prerequisites](#1-prerequisites)
+2. [Day 1: Setup Supabase & Refine](#2-day-1-setup-supabase--refine)
+3. [Day 2: Products Management](#3-day-2-products-management)
+4. [Day 3: Stock Management](#4-day-3-stock-management)
+5. [Day 4: Dashboard & Reports](#5-day-4-dashboard--reports)
+6. [Day 5: Voice Input & PWA](#6-day-5-voice-input--pwa)
+7. [Day 6: Testing & Polish](#7-day-6-testing--polish)
+8. [Day 7: Deploy & Launch](#8-day-7-deploy--launch)
+9. [Week 2+: Get Customers](#9-week-2-get-customers)
+10. [Troubleshooting](#10-troubleshooting)
 
 ---
 
-## 1. PROJECT OVERVIEW
-
-### What You're Building
-
-**LocalBusinessOS** - Voice-first inventory management for small Indian retailers
-
-**Core Features (MVP):**
-
-1. ✅ Voice stock entry (Tamil): "Tomato 5 kg add pannu"
-2. ✅ Product list with current stock levels
-3. ✅ Low stock alerts (WhatsApp)
-4. ✅ Simple dashboard
-5. ✅ Offline-first (works without internet)
-
-**NOT in MVP (Phase 2):**
-
-- ❌ AI demand forecasting
-- ❌ Multi-location support
-- ❌ Advanced analytics
-- ❌ Cost prediction
-
-### Tech Stack
-
-```
-Mobile:    React Native + Expo
-Backend:   Node.js + Express + TypeScript
-Database:  Supabase (PostgreSQL)
-Voice:     Google Cloud Speech-to-Text (add Week 7)
-Hosting:   Railway.app (backend), Expo (mobile)
-```
-
-### Architecture (Simple View)
-
-```
-┌──────────────────┐
-│  Mobile App      │  ← User interacts here
-│  (React Native)  │
-└────────┬─────────┘
-         │ HTTP REST API
-         ↓
-┌──────────────────┐
-│  Backend API     │  ← Your Node.js code
-│  (Express.js)    │
-└────────┬─────────┘
-         │
-         ↓
-┌──────────────────┐
-│  Database        │  ← Supabase PostgreSQL
-│  (Supabase)      │
-└──────────────────┘
-```
-
----
-
-## 2. PREREQUISITES & SETUP
+## 1. PREREQUISITES
 
 ### What You Need
 
-**Hardware:**
-
-- ✅ Mac Mini M4 (you have this)
-- ✅ iPad 11th gen (for testing)
-- ✅ Android phone (borrow one for testing)
-
 **Accounts (All Free):**
-
-- ✅ Supabase account (database) - supabase.com
-- ✅ Railway account (hosting) - railway.app
-- ✅ Expo account (mobile deployment) - expo.dev
-- ✅ Twilio account (WhatsApp) - twilio.com
-- ✅ GitHub account (code storage) - github.com
+- ✅ GitHub account - github.com
+- ✅ Supabase account - supabase.com
+- ✅ Vercel account - vercel.com (for deployment)
 
 **Software to Install:**
 
@@ -101,69 +67,50 @@ brew install node
 
 # Verify
 node --version  # Should show v18.x or higher
-npm --version   # Should show 9.x or higher
 
 # 2. Git
 brew install git
 
-# 3. VS Code (or your preferred editor)
+# 3. VS Code (optional, any editor works)
 brew install --cask visual-studio-code
-
-# 4. Expo CLI
-npm install -g expo-cli
-
-# 5. PostgreSQL client (optional, for testing)
-brew install postgresql
 ```
 
-### Folder Structure (Create This)
+**Create Project Folder:**
 
 ```bash
-# Create main project folder
-mkdir shopmate
-cd shopmate
-
-# Create subfolders
-mkdir backend
-mkdir mobile
-mkdir docs
-
-# Your structure:
-shopmate/
-├── backend/          ← Node.js API
-├── mobile/           ← React Native app
-└── docs/             ← Documentation
+mkdir ~/shopmate
+cd ~/shopmate
 ```
 
 ---
 
-## 3. WEEK 1-2: DATABASE & BACKEND FOUNDATION
+## 2. DAY 1: SETUP SUPABASE & REFINE
 
-### Day 1-2: Set Up Supabase Database
+### Step 1: Create Supabase Database (15 minutes)
 
-#### Step 1: Create Supabase Project
+#### 1.1 Create Project
 
 1. Go to https://supabase.com
-2. Click "Start your project"
-3. Sign up with GitHub
-4. Create new project:
+2. Sign in with GitHub
+3. Click "New Project"
    - Name: `shopmate-db`
-   - Database Password: (save this!)
-   - Region: Mumbai (closest to you)
-   - Free plan: ✅
+   - Database Password: (create strong password, save it!)
+   - Region: Mumbai
+   - Plan: Free
+4. Wait 2-3 minutes for database to initialize
 
-#### Step 2: Create Database Schema
+#### 1.2 Run Database Schema
 
-1. In Supabase dashboard, click "SQL Editor"
+1. In Supabase dashboard, click "SQL Editor" (left sidebar)
 2. Click "New query"
-3. Copy-paste this ENTIRE schema:
+3. Copy and paste this ENTIRE schema:
 
 ```sql
 -- Enable UUID extension
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- ============================================
--- TABLE 1: USER PROFILES
+-- USER PROFILES TABLE
 -- ============================================
 CREATE TABLE user_profiles (
   id UUID REFERENCES auth.users PRIMARY KEY,
@@ -176,7 +123,7 @@ CREATE TABLE user_profiles (
 );
 
 -- ============================================
--- TABLE 2: PRODUCTS
+-- PRODUCTS TABLE
 -- ============================================
 CREATE TABLE products (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -194,18 +141,17 @@ CREATE TABLE products (
   UNIQUE(user_id, name)
 );
 
--- Create indexes for faster queries
 CREATE INDEX idx_products_user ON products(user_id);
-CREATE INDEX idx_products_name ON products(name);
+CREATE INDEX idx_products_stock ON products(current_stock);
 
 -- ============================================
--- TABLE 3: STOCK ENTRIES
+-- STOCK ENTRIES TABLE
 -- ============================================
 CREATE TABLE stock_entries (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   user_id UUID REFERENCES user_profiles(id) ON DELETE CASCADE,
   product_id UUID REFERENCES products(id) ON DELETE CASCADE,
-  entry_type VARCHAR(20) NOT NULL,
+  entry_type VARCHAR(20) NOT NULL CHECK (entry_type IN ('purchase', 'sale', 'adjustment', 'waste')),
   quantity DECIMAL(10,2) NOT NULL,
   unit_price DECIMAL(10,2),
   expiry_date DATE,
@@ -220,7 +166,7 @@ CREATE INDEX idx_stock_entries_user ON stock_entries(user_id);
 CREATE INDEX idx_stock_entries_date ON stock_entries(created_at DESC);
 
 -- ============================================
--- TABLE 4: ALERTS
+-- ALERTS TABLE
 -- ============================================
 CREATE TABLE alerts (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -234,13 +180,12 @@ CREATE TABLE alerts (
 );
 
 CREATE INDEX idx_alerts_user ON alerts(user_id);
-CREATE INDEX idx_alerts_read ON alerts(is_read);
 
 -- ============================================
 -- FUNCTIONS & TRIGGERS
 -- ============================================
 
--- Function: Auto-update updated_at timestamp
+-- Auto-update updated_at timestamp
 CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -249,23 +194,22 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Trigger for products table
-CREATE TRIGGER update_products_updated_at
+CREATE TRIGGER update_products_updated_at 
 BEFORE UPDATE ON products
 FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
--- Function: Auto-update product stock when stock_entries added
+-- Auto-update product stock when stock_entries added
 CREATE OR REPLACE FUNCTION update_product_stock()
 RETURNS TRIGGER AS $$
 BEGIN
-  IF NEW.entry_type = 'purchase' OR NEW.entry_type = 'adjustment' THEN
-    UPDATE products
+  IF NEW.entry_type IN ('purchase', 'adjustment') THEN
+    UPDATE products 
     SET current_stock = current_stock + NEW.quantity,
         updated_at = NOW()
     WHERE id = NEW.product_id;
-  ELSIF NEW.entry_type = 'sale' OR NEW.entry_type = 'waste' THEN
-    UPDATE products
-    SET current_stock = current_stock - NEW.quantity,
+  ELSIF NEW.entry_type IN ('sale', 'waste') THEN
+    UPDATE products 
+    SET current_stock = GREATEST(current_stock - NEW.quantity, 0),
         updated_at = NOW()
     WHERE id = NEW.product_id;
   END IF;
@@ -273,34 +217,43 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Trigger for stock entries
-CREATE TRIGGER update_stock_after_entry
+CREATE TRIGGER update_stock_after_entry 
 AFTER INSERT ON stock_entries
 FOR EACH ROW EXECUTE FUNCTION update_product_stock();
 
--- Function: Create alert when stock is low
+-- Create alert when stock is low
 CREATE OR REPLACE FUNCTION check_low_stock()
 RETURNS TRIGGER AS $$
 DECLARE
   product_name VARCHAR(255);
+  existing_alert_count INTEGER;
 BEGIN
   IF NEW.current_stock <= NEW.min_stock_threshold THEN
     SELECT name INTO product_name FROM products WHERE id = NEW.id;
-
-    INSERT INTO alerts (user_id, product_id, alert_type, message)
-    VALUES (
-      NEW.user_id,
-      NEW.id,
-      'low_stock',
-      product_name || ' is running low. Current stock: ' || NEW.current_stock || ' ' || NEW.unit
-    );
+    
+    -- Check if alert already exists (avoid duplicates)
+    SELECT COUNT(*) INTO existing_alert_count
+    FROM alerts
+    WHERE product_id = NEW.id
+      AND alert_type = 'low_stock'
+      AND is_read = false;
+    
+    -- Only create alert if none exists
+    IF existing_alert_count = 0 THEN
+      INSERT INTO alerts (user_id, product_id, alert_type, message)
+      VALUES (
+        NEW.user_id,
+        NEW.id,
+        'low_stock',
+        product_name || ' is running low. Current stock: ' || NEW.current_stock || ' ' || NEW.unit
+      );
+    END IF;
   END IF;
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
--- Trigger for low stock check
-CREATE TRIGGER check_low_stock_trigger
+CREATE TRIGGER check_low_stock_trigger 
 AFTER UPDATE OF current_stock ON products
 FOR EACH ROW EXECUTE FUNCTION check_low_stock();
 
@@ -314,1685 +267,1567 @@ ALTER TABLE stock_entries ENABLE ROW LEVEL SECURITY;
 ALTER TABLE alerts ENABLE ROW LEVEL SECURITY;
 
 -- Users can only see their own data
-CREATE POLICY "Users can view own profile"
-ON user_profiles FOR SELECT
+CREATE POLICY "Users can view own profile" 
+ON user_profiles FOR SELECT 
 USING (auth.uid() = id);
 
-CREATE POLICY "Users can update own profile"
-ON user_profiles FOR UPDATE
+CREATE POLICY "Users can update own profile" 
+ON user_profiles FOR UPDATE 
 USING (auth.uid() = id);
 
-CREATE POLICY "Users can view own products"
-ON products FOR ALL
+CREATE POLICY "Users can insert own profile"
+ON user_profiles FOR INSERT
+WITH CHECK (auth.uid() = id);
+
+CREATE POLICY "Users can manage own products" 
+ON products FOR ALL 
 USING (auth.uid() = user_id);
 
-CREATE POLICY "Users can view own stock entries"
-ON stock_entries FOR ALL
+CREATE POLICY "Users can manage own stock entries" 
+ON stock_entries FOR ALL 
 USING (auth.uid() = user_id);
 
-CREATE POLICY "Users can view own alerts"
-ON alerts FOR ALL
+CREATE POLICY "Users can manage own alerts" 
+ON alerts FOR ALL 
 USING (auth.uid() = user_id);
 ```
 
-4. Click "Run" (bottom right)
+4. Click "Run" button (bottom right)
 5. You should see "Success. No rows returned"
 
-#### Step 3: Get Supabase Credentials
+✅ **Database is ready!**
+
+#### 1.3 Get Supabase Credentials
 
 1. In Supabase, go to Settings → API
-2. Copy these values (you'll need them):
-   - Project URL: `https://xxxxx.supabase.co`
-   - Anon/Public Key: `eyJhbGc...` (long string)
-   - Service Role Key: `eyJhbGc...` (different long string)
+2. Copy these values (you'll need them in Step 2):
+   - **Project URL**: `https://xxxxx.supabase.co`
+   - **Anon/Public Key**: `eyJhbGc...` (long string)
 
 ---
 
-### Day 3-5: Create Backend Project
-
-#### Step 1: Initialize Backend
+### Step 2: Create Refine App (10 minutes)
 
 ```bash
-cd ~/shopmate/backend
+cd ~/shopmate
 
-# Initialize npm project
-npm init -y
+# Create Refine app
+npm create refine-app@latest shopmate-web
 
-# Install dependencies
-npm install express cors dotenv
-npm install @supabase/supabase-js
-npm install typescript ts-node @types/node @types/express @types/cors nodemon --save-dev
+# ⚠️ IMPORTANT: Answer prompts like this:
+# ? Choose a project template: refine-vite
+# ? What would you like to name your project?: shopmate-web
+# ? Choose your backend service: Supabase
+# ? Do you want to use a UI Framework?: Ant Design
+# ? Do you want to add example pages?: Yes (recommended)
+# ? Do you need i18n (Internationalization) support?: No
+# ? Do you need to customize the default theme?: No
+# ? Do you want to add dark mode support?: No (optional, choose Yes if you want)
 
-# Initialize TypeScript
-npx tsc --init
+# Wait for installation (2-3 minutes)
+
+cd shopmate-web
 ```
 
-#### Step 2: Update package.json
+---
 
-Open `package.json` and update the scripts section:
+### Step 3: Configure Supabase Connection (2 minutes)
 
-```json
-{
-  "name": "shopmate-backend",
-  "version": "1.0.0",
-  "main": "dist/server.js",
-  "scripts": {
-    "dev": "nodemon --exec ts-node src/server.ts",
-    "build": "tsc",
-    "start": "node dist/server.js"
-  },
-  "dependencies": {
-    "@supabase/supabase-js": "^2.38.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2"
-  },
-  "devDependencies": {
-    "@types/cors": "^2.8.17",
-    "@types/express": "^4.17.21",
-    "@types/node": "^20.10.5",
-    "nodemon": "^3.0.2",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.3.3"
-  }
-}
-```
-
-#### Step 3: Update tsconfig.json
-
-Replace contents with:
-
-```json
-{
-  "compilerOptions": {
-    "target": "ES2020",
-    "module": "commonjs",
-    "lib": ["ES2020"],
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "moduleResolution": "node"
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
-}
-```
-
-#### Step 4: Create .env File
+Create `.env` file in `shopmate-web` folder:
 
 ```bash
-# Create .env file
 cat > .env << 'EOF'
-# Server
-NODE_ENV=development
-PORT=3000
-
-# Supabase (replace with YOUR values from Step 3 above)
-SUPABASE_URL=https://xxxxx.supabase.co
-SUPABASE_ANON_KEY=your_anon_key_here
-SUPABASE_SERVICE_KEY=your_service_role_key_here
+VITE_SUPABASE_URL=https://xxxxx.supabase.co
+VITE_SUPABASE_KEY=your_anon_key_here
 EOF
 ```
 
-**⚠️ IMPORTANT:** Replace the `xxxxx` and keys with YOUR actual values!
+**⚠️ REPLACE** `xxxxx.supabase.co` and `your_anon_key_here` with YOUR actual values from Step 1.3!
 
-#### Step 5: Create Folder Structure
+---
 
-```bash
-cd ~/shopmate/backend
-
-# Create folders
-mkdir -p src/config
-mkdir -p src/routes
-mkdir -p src/services
-mkdir -p src/middleware
-mkdir -p src/types
-```
-
-Your structure should look like:
-
-```
-backend/
-├── src/
-│   ├── config/
-│   ├── routes/
-│   ├── services/
-│   ├── middleware/
-│   └── types/
-├── package.json
-├── tsconfig.json
-└── .env
-```
-
-#### Step 6: Create Database Config
-
-Create file: `src/config/database.ts`
-
-```typescript
-import { createClient, SupabaseClient } from "@supabase/supabase-js";
-
-if (!process.env.SUPABASE_URL || !process.env.SUPABASE_ANON_KEY) {
-  throw new Error("Missing Supabase credentials in .env file");
-}
-
-export const supabase: SupabaseClient = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_ANON_KEY
-);
-
-console.log("✅ Supabase client initialized");
-```
-
-#### Step 7: Create Main Server File
-
-Create file: `src/server.ts`
-
-```typescript
-import express, { Express, Request, Response } from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-
-// Load environment variables
-dotenv.config();
-
-const app: Express = express();
-const PORT = process.env.PORT || 3000;
-
-// Middleware
-app.use(cors());
-app.use(express.json());
-
-// Simple logging
-app.use((req: Request, res: Response, next) => {
-  console.log(`${req.method} ${req.path}`);
-  next();
-});
-
-// Health check endpoint
-app.get("/health", (req: Request, res: Response) => {
-  res.json({
-    status: "ok",
-    timestamp: new Date().toISOString(),
-    message: "LocalBusinessOS API is running!",
-  });
-});
-
-// Test database connection
-app.get("/test-db", async (req: Request, res: Response) => {
-  try {
-    const { supabase } = await import("./config/database");
-    const { data, error } = await supabase.from("products").select("count");
-
-    if (error) throw error;
-
-    res.json({
-      status: "Database connected!",
-      data,
-    });
-  } catch (error: any) {
-    res.status(500).json({
-      status: "Database connection failed",
-      error: error.message,
-    });
-  }
-});
-
-// 404 handler
-app.use((req: Request, res: Response) => {
-  res.status(404).json({ error: "Route not found" });
-});
-
-// Start server
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-  console.log(`📊 Health check: http://localhost:${PORT}/health`);
-});
-```
-
-#### Step 8: Test Your Backend
+### Step 4: Run the App (1 minute)
 
 ```bash
-# Make sure you're in backend folder
-cd ~/shopmate/backend
-
-# Run the server
 npm run dev
 
 # You should see:
-# 🚀 Server running on http://localhost:3000
-# 📊 Health check: http://localhost:3000/health
+# ➜  Local:   http://localhost:5173/
 ```
 
-Open browser and go to: `http://localhost:3000/health`
+Open browser: http://localhost:5173
 
-You should see:
-
-```json
-{
-  "status": "ok",
-  "timestamp": "2025-11-07T...",
-  "message": "LocalBusinessOS API is running!"
-}
-```
-
-Also test: `http://localhost:3000/test-db`
-
-Should see:
-
-```json
-{
-  "status": "Database connected!",
-  "data": ...
-}
-```
-
-✅ **If you see this, Week 1-2 foundation is COMPLETE!**
+**YOU SHOULD SEE: Login page!** 🎉
 
 ---
 
-## 4. WEEK 3-4: CORE APIs
+### Step 5: Create Your First Account (2 minutes)
 
-### Day 6-8: Authentication API
+1. Click "Sign up" tab
+2. Enter:
+   - Email: your_email@example.com
+   - Password: test123456
+3. Click "Sign up"
+4. You're logged in! 🎉
 
-#### Step 1: Create Auth Middleware
+**You see a dashboard with sample pages!**
 
-Create file: `src/middleware/auth.ts`
+---
 
-```typescript
-import { Request, Response, NextFunction } from "express";
-import { supabase } from "../config/database";
+### ✅ DAY 1 COMPLETE!
 
-export interface AuthRequest extends Request {
-  user?: {
-    id: string;
-    email?: string;
-    phone?: string;
-  };
-}
+**What you have:**
+- ✅ Supabase database with all tables
+- ✅ Refine app running
+- ✅ Authentication working
+- ✅ Dashboard showing
+- ✅ Example pages (you'll customize these)
 
-export const authenticate = async (
-  req: AuthRequest,
-  res: Response,
-  next: NextFunction
-): Promise<void> => {
-  try {
-    const authHeader = req.headers.authorization;
+**Total time: ~30 minutes!**
 
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      res.status(401).json({ error: "Missing authorization header" });
-      return;
-    }
+---
 
-    const token = authHeader.substring(7);
+## 3. DAY 2: PRODUCTS MANAGEMENT
 
-    const {
-      data: { user },
-      error,
-    } = await supabase.auth.getUser(token);
+### Overview
 
-    if (error || !user) {
-      res.status(401).json({ error: "Invalid token" });
-      return;
-    }
+Today you'll customize the products page to match your inventory needs.
 
-    req.user = {
-      id: user.id,
-      email: user.email,
-      phone: user.phone,
-    };
+Refine already created example CRUD pages. You'll modify them for products.
 
-    next();
-  } catch (error) {
-    console.error("Auth error:", error);
-    res.status(500).json({ error: "Authentication failed" });
-  }
-};
+---
+
+### Step 1: Generate Products Resource (2 minutes)
+
+```bash
+cd ~/shopmate/shopmate-web
+
+# Refine CLI to generate pages
+npm run refine create-resource products
 ```
 
-#### Step 2: Create Auth Routes
+This creates:
+- `src/pages/products/list.tsx` - View all products
+- `src/pages/products/create.tsx` - Add new product
+- `src/pages/products/edit.tsx` - Edit product
+- `src/pages/products/show.tsx` - View single product
 
-Create file: `src/routes/auth.routes.ts`
+---
 
-```typescript
-import { Router, Request, Response } from "express";
-import { supabase } from "../config/database";
+### Step 2: Update Products List Page (15 minutes)
 
-const router = Router();
-
-// POST /api/auth/signup - Register new user
-router.post("/signup", async (req: Request, res: Response) => {
-  try {
-    const { phone, password, businessName } = req.body;
-
-    // Validate input
-    if (!phone || !password || !businessName) {
-      return res.status(400).json({
-        error: "Phone, password, and business name are required",
-      });
-    }
-
-    // Create auth user (using phone as email for now)
-    const { data: authData, error: authError } = await supabase.auth.signUp({
-      email: `${phone}@shopmate.app`, // Temporary email format
-      password: password,
-      phone: phone,
-    });
-
-    if (authError) throw authError;
-
-    // Create user profile
-    const { data: profileData, error: profileError } = await supabase
-      .from("user_profiles")
-      .insert({
-        id: authData.user!.id,
-        phone: phone,
-        business_name: businessName,
-      })
-      .select()
-      .single();
-
-    if (profileError) throw profileError;
-
-    res.status(201).json({
-      message: "User created successfully",
-      user: profileData,
-      session: authData.session,
-    });
-  } catch (error: any) {
-    console.error("Signup error:", error);
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// POST /api/auth/login - Login user
-router.post("/login", async (req: Request, res: Response) => {
-  try {
-    const { phone, password } = req.body;
-
-    if (!phone || !password) {
-      return res.status(400).json({ error: "Phone and password required" });
-    }
-
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: `${phone}@shopmate.app`,
-      password: password,
-    });
-
-    if (error) throw error;
-
-    // Get user profile
-    const { data: profile } = await supabase
-      .from("user_profiles")
-      .select("*")
-      .eq("id", data.user!.id)
-      .single();
-
-    res.json({
-      message: "Login successful",
-      user: profile,
-      session: data.session,
-    });
-  } catch (error: any) {
-    console.error("Login error:", error);
-    res.status(401).json({ error: "Invalid credentials" });
-  }
-});
-
-export default router;
-```
-
-#### Step 3: Add Auth Routes to Server
-
-Update `src/server.ts`:
+Edit `src/pages/products/list.tsx`:
 
 ```typescript
-import express, { Express, Request, Response } from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import authRoutes from "./routes/auth.routes"; // ADD THIS
+import React from "react";
+import { useTable, List, EditButton, ShowButton, DeleteButton } from "@refinedev/antd";
+import { Table, Space, Tag } from "antd";
 
-dotenv.config();
-
-const app: Express = express();
-const PORT = process.env.PORT || 3000;
-
-app.use(cors());
-app.use(express.json());
-
-app.use((req: Request, res: Response, next) => {
-  console.log(`${req.method} ${req.path}`);
-  next();
-});
-
-app.get("/health", (req: Request, res: Response) => {
-  res.json({
-    status: "ok",
-    timestamp: new Date().toISOString(),
+export const ProductList: React.FC = () => {
+  const { tableProps } = useTable({
+    resource: "products",
+    syncWithLocation: true,
   });
-});
 
-// ADD THIS LINE - Mount auth routes
-app.use("/api/auth", authRoutes);
-
-app.use((req: Request, res: Response) => {
-  res.status(404).json({ error: "Route not found" });
-});
-
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-});
+  return (
+    <List>
+      <Table {...tableProps} rowKey="id">
+        <Table.Column dataIndex="name" title="Product Name" />
+        
+        <Table.Column dataIndex="category" title="Category" />
+        
+        <Table.Column 
+          dataIndex="current_stock" 
+          title="Current Stock"
+          render={(value, record: any) => (
+            <span>
+              {value} {record.unit}
+              {value <= record.min_stock_threshold && (
+                <Tag color="red" style={{ marginLeft: 8 }}>Low Stock</Tag>
+              )}
+            </span>
+          )}
+        />
+        
+        <Table.Column 
+          dataIndex="min_stock_threshold" 
+          title="Min Stock"
+          render={(value, record: any) => `${value} ${record.unit}`}
+        />
+        
+        <Table.Column 
+          dataIndex="selling_price" 
+          title="Price"
+          render={(value) => `₹${value}`}
+        />
+        
+        <Table.Column
+          title="Actions"
+          dataIndex="actions"
+          render={(_, record: any) => (
+            <Space>
+              <ShowButton hideText size="small" recordItemId={record.id} />
+              <EditButton hideText size="small" recordItemId={record.id} />
+              <DeleteButton hideText size="small" recordItemId={record.id} />
+            </Space>
+          )}
+        />
+      </Table>
+    </List>
+  );
+};
 ```
 
-#### Step 4: Test Authentication
+---
+
+### Step 3: Update Create Product Form (15 minutes)
+
+Edit `src/pages/products/create.tsx`:
+
+```typescript
+import React from "react";
+import { Create, useForm } from "@refinedev/antd";
+import { Form, Input, InputNumber, Select, Switch } from "antd";
+
+export const ProductCreate: React.FC = () => {
+  const { formProps, saveButtonProps } = useForm({
+    resource: "products",
+  });
+
+  return (
+    <Create saveButtonProps={saveButtonProps}>
+      <Form {...formProps} layout="vertical">
+        <Form.Item
+          label="Product Name"
+          name="name"
+          rules={[{ required: true, message: "Please enter product name" }]}
+        >
+          <Input placeholder="e.g., Tomato, Rice, Paracetamol" />
+        </Form.Item>
+
+        <Form.Item label="Category" name="category">
+          <Select placeholder="Select category">
+            <Select.Option value="Vegetables">Vegetables</Select.Option>
+            <Select.Option value="Fruits">Fruits</Select.Option>
+            <Select.Option value="Groceries">Groceries</Select.Option>
+            <Select.Option value="Medicines">Medicines</Select.Option>
+            <Select.Option value="Dairy">Dairy</Select.Option>
+            <Select.Option value="Beverages">Beverages</Select.Option>
+            <Select.Option value="Others">Others</Select.Option>
+          </Select>
+        </Form.Item>
+
+        <Form.Item
+          label="Unit"
+          name="unit"
+          initialValue="units"
+          rules={[{ required: true }]}
+        >
+          <Select>
+            <Select.Option value="kg">Kilograms (kg)</Select.Option>
+            <Select.Option value="grams">Grams</Select.Option>
+            <Select.Option value="liters">Liters</Select.Option>
+            <Select.Option value="ml">Milliliters (ml)</Select.Option>
+            <Select.Option value="pieces">Pieces</Select.Option>
+            <Select.Option value="units">Units</Select.Option>
+            <Select.Option value="packets">Packets</Select.Option>
+          </Select>
+        </Form.Item>
+
+        <Form.Item
+          label="Minimum Stock Threshold"
+          name="min_stock_threshold"
+          initialValue={10}
+          rules={[{ required: true }]}
+        >
+          <InputNumber 
+            min={0} 
+            style={{ width: "100%" }}
+            placeholder="Alert when stock falls below this"
+          />
+        </Form.Item>
+
+        <Form.Item label="Cost Price (₹)" name="cost_price">
+          <InputNumber 
+            min={0} 
+            style={{ width: "100%" }}
+            placeholder="Purchase price"
+            prefix="₹"
+          />
+        </Form.Item>
+
+        <Form.Item label="Selling Price (₹)" name="selling_price">
+          <InputNumber 
+            min={0} 
+            style={{ width: "100%" }}
+            placeholder="Selling price"
+            prefix="₹"
+          />
+        </Form.Item>
+
+        <Form.Item 
+          label="Has Expiry Date?" 
+          name="has_expiry" 
+          valuePropName="checked"
+          initialValue={false}
+        >
+          <Switch />
+        </Form.Item>
+      </Form>
+    </Create>
+  );
+};
+```
+
+---
+
+### Step 4: Update Edit Product Form (5 minutes)
+
+Edit `src/pages/products/edit.tsx`:
+
+```typescript
+import React from "react";
+import { Edit, useForm } from "@refinedev/antd";
+import { Form, Input, InputNumber, Select, Switch } from "antd";
+
+export const ProductEdit: React.FC = () => {
+  const { formProps, saveButtonProps } = useForm({
+    resource: "products",
+  });
+
+  return (
+    <Edit saveButtonProps={saveButtonProps}>
+      <Form {...formProps} layout="vertical">
+        <Form.Item label="Product Name" name="name" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+
+        <Form.Item label="Category" name="category">
+          <Select>
+            <Select.Option value="Vegetables">Vegetables</Select.Option>
+            <Select.Option value="Fruits">Fruits</Select.Option>
+            <Select.Option value="Groceries">Groceries</Select.Option>
+            <Select.Option value="Medicines">Medicines</Select.Option>
+            <Select.Option value="Dairy">Dairy</Select.Option>
+            <Select.Option value="Beverages">Beverages</Select.Option>
+            <Select.Option value="Others">Others</Select.Option>
+          </Select>
+        </Form.Item>
+
+        <Form.Item label="Unit" name="unit">
+          <Select>
+            <Select.Option value="kg">Kilograms (kg)</Select.Option>
+            <Select.Option value="grams">Grams</Select.Option>
+            <Select.Option value="liters">Liters</Select.Option>
+            <Select.Option value="ml">Milliliters (ml)</Select.Option>
+            <Select.Option value="pieces">Pieces</Select.Option>
+            <Select.Option value="units">Units</Select.Option>
+            <Select.Option value="packets">Packets</Select.Option>
+          </Select>
+        </Form.Item>
+
+        <Form.Item label="Minimum Stock Threshold" name="min_stock_threshold">
+          <InputNumber min={0} style={{ width: "100%" }} />
+        </Form.Item>
+
+        <Form.Item label="Cost Price (₹)" name="cost_price">
+          <InputNumber min={0} style={{ width: "100%" }} prefix="₹" />
+        </Form.Item>
+
+        <Form.Item label="Selling Price (₹)" name="selling_price">
+          <InputNumber min={0} style={{ width: "100%" }} prefix="₹" />
+        </Form.Item>
+
+        <Form.Item label="Has Expiry Date?" name="has_expiry" valuePropName="checked">
+          <Switch />
+        </Form.Item>
+      </Form>
+    </Edit>
+  );
+};
+```
+
+---
+
+### Step 5: Update App Routing (5 minutes)
+
+Edit `src/App.tsx` - add products resource:
+
+```typescript
+import { Refine } from "@refinedev/core";
+import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
+import {
+  AuthPage,
+  ErrorComponent,
+  Layout,
+  notificationProvider,
+} from "@refinedev/antd";
+import "@refinedev/antd/dist/reset.css";
+import routerBindings, {
+  NavigateToResource,
+  CatchAllNavigate,
+  UnsavedChangesNotifier,
+  DocumentTitleHandler,
+} from "@refinedev/react-router-v6";
+import { dataProvider, liveProvider } from "@refinedev/supabase";
+import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import { supabaseClient } from "./utility";
+import authProvider from "./authProvider";
+import { ShopOutlined, DashboardOutlined } from "@ant-design/icons";
+
+// Import your pages
+import { ProductList, ProductCreate, ProductEdit, ProductShow } from "./pages/products";
+
+function App() {
+  return (
+    <BrowserRouter>
+      <RefineKbarProvider>
+        <Refine
+          dataProvider={dataProvider(supabaseClient)}
+          liveProvider={liveProvider(supabaseClient)}
+          authProvider={authProvider}
+          routerProvider={routerBindings}
+          notificationProvider={notificationProvider}
+          resources={[
+            {
+              name: "products",
+              list: "/products",
+              create: "/products/create",
+              edit: "/products/edit/:id",
+              show: "/products/show/:id",
+              meta: {
+                canDelete: true,
+                icon: <ShopOutlined />,
+              },
+            },
+          ]}
+          options={{
+            syncWithLocation: true,
+            warnWhenUnsavedChanges: true,
+            liveMode: "auto",
+          }}
+        >
+          <Routes>
+            <Route
+              element={
+                <Layout>
+                  <Outlet />
+                </Layout>
+              }
+            >
+              <Route index element={<NavigateToResource resource="products" />} />
+              
+              <Route path="/products">
+                <Route index element={<ProductList />} />
+                <Route path="create" element={<ProductCreate />} />
+                <Route path="edit/:id" element={<ProductEdit />} />
+                <Route path="show/:id" element={<ProductShow />} />
+              </Route>
+
+              <Route path="*" element={<ErrorComponent />} />
+            </Route>
+
+            <Route
+              element={
+                <AuthPage
+                  type="login"
+                  formProps={{
+                    initialValues: { email: "", password: "" },
+                  }}
+                />
+              }
+              path="/login"
+            />
+            <Route element={<AuthPage type="register" />} path="/register" />
+            <Route element={<AuthPage type="forgotPassword" />} path="/forgot-password" />
+          </Routes>
+
+          <RefineKbar />
+          <UnsavedChangesNotifier />
+          <DocumentTitleHandler />
+        </Refine>
+      </RefineKbarProvider>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+```
+
+---
+
+### Step 6: Create Product Show Page (10 minutes)
+
+Edit `src/pages/products/show.tsx`:
+
+```typescript
+import React from "react";
+import { useShow } from "@refinedev/core";
+import { Show, NumberField, TextField, BooleanField } from "@refinedev/antd";
+import { Typography, Tag } from "antd";
+
+const { Title } = Typography;
+
+export const ProductShow: React.FC = () => {
+  const { queryResult } = useShow({
+    resource: "products",
+  });
+
+  const { data, isLoading } = queryResult;
+  const record = data?.data;
+
+  const isLowStock = record && record.current_stock <= record.min_stock_threshold;
+
+  return (
+    <Show isLoading={isLoading}>
+      <Title level={5}>Product Name</Title>
+      <TextField value={record?.name} />
+
+      <Title level={5}>Category</Title>
+      <TextField value={record?.category || "-"} />
+
+      <Title level={5}>Current Stock</Title>
+      <div>
+        <NumberField value={record?.current_stock} /> {record?.unit}
+        {isLowStock && (
+          <Tag color="red" style={{ marginLeft: 8 }}>Low Stock!</Tag>
+        )}
+      </div>
+
+      <Title level={5}>Minimum Stock Threshold</Title>
+      <div>
+        <NumberField value={record?.min_stock_threshold} /> {record?.unit}
+      </div>
+
+      <Title level={5}>Cost Price</Title>
+      <NumberField
+        value={record?.cost_price}
+        options={{
+          style: "currency",
+          currency: "INR",
+        }}
+      />
+
+      <Title level={5}>Selling Price</Title>
+      <NumberField
+        value={record?.selling_price}
+        options={{
+          style: "currency",
+          currency: "INR",
+        }}
+      />
+
+      <Title level={5}>Has Expiry Date?</Title>
+      <BooleanField value={record?.has_expiry} />
+    </Show>
+  );
+};
+```
+
+---
+
+### Step 7: Export All Product Pages (2 minutes)
+
+Create `src/pages/products/index.ts`:
+
+```typescript
+export { ProductList } from "./list";
+export { ProductCreate } from "./create";
+export { ProductEdit } from "./edit";
+export { ProductShow } from "./show";
+```
+
+---
+
+### Step 8: Test Products CRUD (5 minutes)
 
 ```bash
-# Make sure server is running
+# Make sure app is running
 npm run dev
-
-# Test signup (use a REST client like Postman or curl)
-curl -X POST http://localhost:3000/api/auth/signup \
-  -H "Content-Type: application/json" \
-  -d '{
-    "phone": "9876543210",
-    "password": "test123",
-    "businessName": "Test Shop"
-  }'
-
-# You should get a response with user data and session token
 ```
 
-✅ **Authentication is working!**
+1. Go to http://localhost:5173
+2. Login if needed
+3. Click "Products" in sidebar
+4. Click "Create" button
+5. Fill form:
+   - Name: Tomato
+   - Category: Vegetables
+   - Unit: kg
+   - Min Stock: 5
+   - Cost Price: 30
+   - Selling Price: 50
+6. Click "Save"
+7. **You should see your product in the list!** 🎉
+
+Try:
+- ✅ Creating more products
+- ✅ Editing a product
+- ✅ Viewing product details
+- ✅ Deleting a product
 
 ---
 
-### Day 9-11: Products API
+### ✅ DAY 2 COMPLETE!
 
-#### Step 1: Create Product Service
+**What you have:**
+- ✅ Products list with low stock badges
+- ✅ Create product form
+- ✅ Edit product form
+- ✅ View product details
+- ✅ Delete products
+- ✅ All CRUD operations working
 
-Create file: `src/services/productService.ts`
-
-```typescript
-import { supabase } from "../config/database";
-
-export interface Product {
-  id?: string;
-  user_id?: string;
-  name: string;
-  category?: string;
-  unit?: string;
-  current_stock?: number;
-  min_stock_threshold?: number;
-  cost_price?: number;
-  selling_price?: number;
-  has_expiry?: boolean;
-}
-
-export class ProductService {
-  // List all products for a user
-  async listProducts(userId: string): Promise<Product[]> {
-    const { data, error } = await supabase
-      .from("products")
-      .select("*")
-      .eq("user_id", userId)
-      .order("name", { ascending: true });
-
-    if (error) throw error;
-    return data || [];
-  }
-
-  // Get single product
-  async getProduct(userId: string, productId: string): Promise<Product | null> {
-    const { data, error } = await supabase
-      .from("products")
-      .select("*")
-      .eq("user_id", userId)
-      .eq("id", productId)
-      .single();
-
-    if (error && error.code !== "PGRST116") throw error;
-    return data;
-  }
-
-  // Create new product
-  async createProduct(userId: string, productData: Product): Promise<Product> {
-    const { data, error } = await supabase
-      .from("products")
-      .insert({
-        user_id: userId,
-        ...productData,
-      })
-      .select()
-      .single();
-
-    if (error) throw error;
-    return data;
-  }
-
-  // Update product
-  async updateProduct(
-    userId: string,
-    productId: string,
-    updates: Partial<Product>
-  ): Promise<Product | null> {
-    const { data, error } = await supabase
-      .from("products")
-      .update(updates)
-      .eq("user_id", userId)
-      .eq("id", productId)
-      .select()
-      .single();
-
-    if (error && error.code !== "PGRST116") throw error;
-    return data;
-  }
-
-  // Delete product
-  async deleteProduct(userId: string, productId: string): Promise<void> {
-    const { error } = await supabase
-      .from("products")
-      .delete()
-      .eq("user_id", userId)
-      .eq("id", productId);
-
-    if (error) throw error;
-  }
-
-  // Get low stock products
-  async getLowStockProducts(userId: string): Promise<Product[]> {
-    const { data, error } = await supabase
-      .from("products")
-      .select("*")
-      .eq("user_id", userId)
-      .filter("current_stock", "lte", "min_stock_threshold")
-      .order("current_stock", { ascending: true });
-
-    if (error) throw error;
-    return data || [];
-  }
-}
-```
-
-#### Step 2: Create Product Routes
-
-Create file: `src/routes/products.routes.ts`
-
-```typescript
-import { Router } from "express";
-import { authenticate, AuthRequest } from "../middleware/auth";
-import { ProductService } from "../services/productService";
-
-const router = Router();
-const productService = new ProductService();
-
-// All routes require authentication
-router.use(authenticate);
-
-// GET /api/products - List all products
-router.get("/", async (req: AuthRequest, res) => {
-  try {
-    const products = await productService.listProducts(req.user!.id);
-    res.json({ data: products });
-  } catch (error: any) {
-    console.error("Error listing products:", error);
-    res.status(500).json({ error: "Failed to fetch products" });
-  }
-});
-
-// GET /api/products/:id - Get single product
-router.get("/:id", async (req: AuthRequest, res) => {
-  try {
-    const product = await productService.getProduct(
-      req.user!.id,
-      req.params.id
-    );
-
-    if (!product) {
-      return res.status(404).json({ error: "Product not found" });
-    }
-
-    res.json({ data: product });
-  } catch (error: any) {
-    console.error("Error fetching product:", error);
-    res.status(500).json({ error: "Failed to fetch product" });
-  }
-});
-
-// POST /api/products - Create new product
-router.post("/", async (req: AuthRequest, res) => {
-  try {
-    const productData = req.body;
-
-    if (!productData.name) {
-      return res.status(400).json({ error: "Product name is required" });
-    }
-
-    const product = await productService.createProduct(
-      req.user!.id,
-      productData
-    );
-
-    res.status(201).json({ data: product });
-  } catch (error: any) {
-    console.error("Error creating product:", error);
-
-    if (error.code === "23505") {
-      return res.status(409).json({
-        error: "Product with this name already exists",
-      });
-    }
-
-    res.status(500).json({ error: "Failed to create product" });
-  }
-});
-
-// PUT /api/products/:id - Update product
-router.put("/:id", async (req: AuthRequest, res) => {
-  try {
-    const product = await productService.updateProduct(
-      req.user!.id,
-      req.params.id,
-      req.body
-    );
-
-    if (!product) {
-      return res.status(404).json({ error: "Product not found" });
-    }
-
-    res.json({ data: product });
-  } catch (error: any) {
-    console.error("Error updating product:", error);
-    res.status(500).json({ error: "Failed to update product" });
-  }
-});
-
-// DELETE /api/products/:id - Delete product
-router.delete("/:id", async (req: AuthRequest, res) => {
-  try {
-    await productService.deleteProduct(req.user!.id, req.params.id);
-    res.status(204).send();
-  } catch (error: any) {
-    console.error("Error deleting product:", error);
-    res.status(500).json({ error: "Failed to delete product" });
-  }
-});
-
-// GET /api/products/alerts/low-stock - Get low stock products
-router.get("/alerts/low-stock", async (req: AuthRequest, res) => {
-  try {
-    const products = await productService.getLowStockProducts(req.user!.id);
-    res.json({ data: products });
-  } catch (error: any) {
-    console.error("Error fetching low stock:", error);
-    res.status(500).json({ error: "Failed to fetch low stock products" });
-  }
-});
-
-export default router;
-```
-
-#### Step 3: Add Products Routes to Server
-
-Update `src/server.ts`:
-
-```typescript
-import authRoutes from "./routes/auth.routes";
-import productRoutes from "./routes/products.routes"; // ADD THIS
-
-// ... existing code ...
-
-app.use("/api/auth", authRoutes);
-app.use("/api/products", productRoutes); // ADD THIS LINE
-
-// ... rest of code ...
-```
-
-#### Step 4: Test Products API
-
-```bash
-# First, login to get a token
-curl -X POST http://localhost:3000/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{
-    "phone": "9876543210",
-    "password": "test123"
-  }'
-
-# Copy the "access_token" from response
-
-# Create a product (replace YOUR_TOKEN with actual token)
-curl -X POST http://localhost:3000/api/products \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -d '{
-    "name": "Tomato",
-    "category": "Vegetables",
-    "unit": "kg",
-    "min_stock_threshold": 5,
-    "cost_price": 30,
-    "selling_price": 50
-  }'
-
-# List products
-curl -X GET http://localhost:3000/api/products \
-  -H "Authorization: Bearer YOUR_TOKEN"
-```
-
-✅ **Products API is working!**
+**Total time: ~1 hour!**
 
 ---
 
-### Day 12-14: Stock Entry API
+## 4. DAY 3: STOCK MANAGEMENT
 
-#### Step 1: Create Stock Service
+### Overview
 
-Create file: `src/services/stockService.ts`
-
-```typescript
-import { supabase } from "../config/database";
-
-export interface StockEntry {
-  id?: string;
-  user_id?: string;
-  product_id: string;
-  entry_type: "purchase" | "sale" | "adjustment" | "waste";
-  quantity: number;
-  unit_price?: number;
-  expiry_date?: string;
-  batch_number?: string;
-  notes?: string;
-  entry_method?: string;
-}
-
-export class StockService {
-  // Add stock entry
-  async addStockEntry(
-    userId: string,
-    entryData: StockEntry
-  ): Promise<StockEntry> {
-    const { data, error } = await supabase
-      .from("stock_entries")
-      .insert({
-        user_id: userId,
-        ...entryData,
-        created_at: new Date().toISOString(),
-      })
-      .select()
-      .single();
-
-    if (error) throw error;
-
-    console.log(
-      `Stock entry added: ${entryData.entry_type} ${entryData.quantity} for product ${entryData.product_id}`
-    );
-
-    return data;
-  }
-
-  // Get stock history for a product
-  async getStockHistory(
-    userId: string,
-    productId: string,
-    limit: number = 50
-  ): Promise<StockEntry[]> {
-    const { data, error } = await supabase
-      .from("stock_entries")
-      .select("*")
-      .eq("user_id", userId)
-      .eq("product_id", productId)
-      .order("created_at", { ascending: false })
-      .limit(limit);
-
-    if (error) throw error;
-    return data || [];
-  }
-
-  // Get all stock entries for a user
-  async getAllStockEntries(
-    userId: string,
-    limit: number = 100
-  ): Promise<StockEntry[]> {
-    const { data, error } = await supabase
-      .from("stock_entries")
-      .select("*, products(name)")
-      .eq("user_id", userId)
-      .order("created_at", { ascending: false })
-      .limit(limit);
-
-    if (error) throw error;
-    return data || [];
-  }
-}
-```
-
-#### Step 2: Create Stock Routes
-
-Create file: `src/routes/stock.routes.ts`
-
-```typescript
-import { Router } from "express";
-import { authenticate, AuthRequest } from "../middleware/auth";
-import { StockService } from "../services/stockService";
-
-const router = Router();
-const stockService = new StockService();
-
-router.use(authenticate);
-
-// POST /api/stock - Add stock entry
-router.post("/", async (req: AuthRequest, res) => {
-  try {
-    const entryData = req.body;
-
-    // Validate required fields
-    if (!entryData.product_id || !entryData.entry_type || !entryData.quantity) {
-      return res.status(400).json({
-        error: "product_id, entry_type, and quantity are required",
-      });
-    }
-
-    // Validate entry_type
-    const validTypes = ["purchase", "sale", "adjustment", "waste"];
-    if (!validTypes.includes(entryData.entry_type)) {
-      return res.status(400).json({
-        error: `entry_type must be one of: ${validTypes.join(", ")}`,
-      });
-    }
-
-    const entry = await stockService.addStockEntry(req.user!.id, entryData);
-
-    res.status(201).json({
-      data: entry,
-      message: "Stock entry added successfully",
-    });
-  } catch (error: any) {
-    console.error("Error adding stock entry:", error);
-    res.status(500).json({ error: "Failed to add stock entry" });
-  }
-});
-
-// GET /api/stock/product/:productId - Get stock history for a product
-router.get("/product/:productId", async (req: AuthRequest, res) => {
-  try {
-    const history = await stockService.getStockHistory(
-      req.user!.id,
-      req.params.productId
-    );
-
-    res.json({ data: history });
-  } catch (error: any) {
-    console.error("Error fetching stock history:", error);
-    res.status(500).json({ error: "Failed to fetch stock history" });
-  }
-});
-
-// GET /api/stock - Get all stock entries
-router.get("/", async (req: AuthRequest, res) => {
-  try {
-    const entries = await stockService.getAllStockEntries(req.user!.id);
-    res.json({ data: entries });
-  } catch (error: any) {
-    console.error("Error fetching stock entries:", error);
-    res.status(500).json({ error: "Failed to fetch stock entries" });
-  }
-});
-
-export default router;
-```
-
-#### Step 3: Add Stock Routes to Server
-
-Update `src/server.ts`:
-
-```typescript
-import authRoutes from "./routes/auth.routes";
-import productRoutes from "./routes/products.routes";
-import stockRoutes from "./routes/stock.routes"; // ADD THIS
-
-// ... existing code ...
-
-app.use("/api/auth", authRoutes);
-app.use("/api/products", productRoutes);
-app.use("/api/stock", stockRoutes); // ADD THIS LINE
-```
-
-#### Step 4: Test Stock API
-
-```bash
-# Add stock purchase (replace YOUR_TOKEN and PRODUCT_ID)
-curl -X POST http://localhost:3000/api/stock \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -d '{
-    "product_id": "PRODUCT_ID_HERE",
-    "entry_type": "purchase",
-    "quantity": 10,
-    "unit_price": 30,
-    "notes": "Weekly purchase"
-  }'
-
-# Check product stock increased
-curl -X GET http://localhost:3000/api/products/PRODUCT_ID_HERE \
-  -H "Authorization: Bearer YOUR_TOKEN"
-
-# current_stock should be 10 now!
-```
-
-✅ **Stock management working! Database triggers auto-updating stock levels!**
+Today you'll add stock entry functionality to track purchases, sales, and adjustments.
 
 ---
 
-## 5. WEEK 5-6: MOBILE APP
-
-### Day 15-17: Set Up React Native App
-
-#### Step 1: Create Expo App
+### Step 1: Generate Stock Entries Resource (2 minutes)
 
 ```bash
-cd ~/shopmate/mobile
-
-# Create new Expo app
-npx create-expo-app@latest . --template blank-typescript
-
-# Install dependencies
-npm install @react-navigation/native @react-navigation/stack
-npm install react-native-screens react-native-safe-area-context
-npm install @react-native-async-storage/async-storage
-npm install axios
-npm install react-native-paper react-native-vector-icons
-
-# Install Expo specific packages
-npx expo install expo-av expo-constants
+npm run refine create-resource stock_entries
 ```
 
-#### Step 2: Create Project Structure
+---
 
-```bash
-cd ~/shopmate/mobile
+### Step 2: Create Stock Entry Form (20 minutes)
 
-# Create folders
-mkdir -p src/screens
-mkdir -p src/components
-mkdir -p src/services
-mkdir -p src/types
-mkdir -p src/navigation
-```
-
-#### Step 3: Create API Service
-
-Create file: `src/services/api.ts`
+Edit `src/pages/stock_entries/create.tsx`:
 
 ```typescript
-import axios from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import React from "react";
+import { Create, useForm, useSelect } from "@refinedev/antd";
+import { Form, Input, InputNumber, Select, DatePicker } from "antd";
 
-// Change this to your computer's IP address
-// Find it with: ifconfig (Mac) or ipconfig (Windows)
-// Look for something like 192.168.1.x
-const API_URL = "http://192.168.1.5:3000/api";
+export const StockEntryCreate: React.FC = () => {
+  const { formProps, saveButtonProps } = useForm({
+    resource: "stock_entries",
+  });
 
-const api = axios.create({
-  baseURL: API_URL,
-  timeout: 10000,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+  const { selectProps: productSelectProps } = useSelect({
+    resource: "products",
+    optionLabel: "name",
+    optionValue: "id",
+  });
 
-// Add auth token to all requests
-api.interceptors.request.use(async (config) => {
-  const token = await AsyncStorage.getItem("auth_token");
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
+  return (
+    <Create saveButtonProps={saveButtonProps}>
+      <Form {...formProps} layout="vertical">
+        <Form.Item
+          label="Product"
+          name="product_id"
+          rules={[{ required: true, message: "Please select a product" }]}
+        >
+          <Select 
+            {...productSelectProps}
+            showSearch
+            placeholder="Select product"
+            filterOption={(input, option) =>
+              (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+            }
+          />
+        </Form.Item>
 
-// Auth API
-export const authAPI = {
-  login: async (phone: string, password: string) => {
-    const response = await api.post("/auth/login", { phone, password });
-    // Save token
-    if (response.data.session?.access_token) {
-      await AsyncStorage.setItem(
-        "auth_token",
-        response.data.session.access_token
-      );
-      await AsyncStorage.setItem("user", JSON.stringify(response.data.user));
+        <Form.Item
+          label="Entry Type"
+          name="entry_type"
+          rules={[{ required: true }]}
+        >
+          <Select placeholder="Select type">
+            <Select.Option value="purchase">Purchase (Add Stock)</Select.Option>
+            <Select.Option value="sale">Sale (Remove Stock)</Select.Option>
+            <Select.Option value="adjustment">Adjustment (Correct Stock)</Select.Option>
+            <Select.Option value="waste">Waste (Damaged/Expired)</Select.Option>
+          </Select>
+        </Form.Item>
+
+        <Form.Item
+          label="Quantity"
+          name="quantity"
+          rules={[{ required: true, message: "Please enter quantity" }]}
+        >
+          <InputNumber 
+            min={0.01}
+            step={0.01}
+            style={{ width: "100%" }}
+            placeholder="e.g., 10.5"
+          />
+        </Form.Item>
+
+        <Form.Item label="Unit Price (₹)" name="unit_price">
+          <InputNumber 
+            min={0}
+            style={{ width: "100%" }}
+            placeholder="Price per unit"
+            prefix="₹"
+          />
+        </Form.Item>
+
+        <Form.Item label="Batch Number" name="batch_number">
+          <Input placeholder="Optional: Batch/Lot number" />
+        </Form.Item>
+
+        <Form.Item label="Expiry Date" name="expiry_date">
+          <DatePicker style={{ width: "100%" }} format="YYYY-MM-DD" />
+        </Form.Item>
+
+        <Form.Item label="Notes" name="notes">
+          <Input.TextArea 
+            rows={3} 
+            placeholder="Optional: Any additional notes"
+          />
+        </Form.Item>
+
+        <Form.Item name="entry_method" initialValue="manual" hidden>
+          <Input />
+        </Form.Item>
+      </Form>
+    </Create>
+  );
+};
+```
+
+---
+
+### Step 3: Create Stock Entries List (15 minutes)
+
+Edit `src/pages/stock_entries/list.tsx`:
+
+```typescript
+import React from "react";
+import { useTable, List, DateField, NumberField } from "@refinedev/antd";
+import { Table, Tag, Space } from "antd";
+
+export const StockEntryList: React.FC = () => {
+  const { tableProps } = useTable({
+    resource: "stock_entries",
+    syncWithLocation: true,
+    sorters: {
+      initial: [
+        {
+          field: "created_at",
+          order: "desc",
+        },
+      ],
+    },
+    meta: {
+      select: "*, products(name, unit)",
+    },
+  });
+
+  const getEntryTypeColor = (type: string) => {
+    switch (type) {
+      case "purchase":
+        return "green";
+      case "sale":
+        return "blue";
+      case "adjustment":
+        return "orange";
+      case "waste":
+        return "red";
+      default:
+        return "default";
     }
-    return response.data;
-  },
+  };
 
-  signup: async (phone: string, password: string, businessName: string) => {
-    const response = await api.post("/auth/signup", {
-      phone,
-      password,
-      businessName,
-    });
-    return response.data;
-  },
+  const getEntryTypeLabel = (type: string) => {
+    switch (type) {
+      case "purchase":
+        return "Purchase";
+      case "sale":
+        return "Sale";
+      case "adjustment":
+        return "Adjustment";
+      case "waste":
+        return "Waste";
+      default:
+        return type;
+    }
+  };
 
-  logout: async () => {
-    await AsyncStorage.removeItem("auth_token");
-    await AsyncStorage.removeItem("user");
-  },
+  return (
+    <List>
+      <Table {...tableProps} rowKey="id">
+        <Table.Column
+          dataIndex={["products", "name"]}
+          title="Product"
+        />
 
-  getCurrentUser: async () => {
-    const userStr = await AsyncStorage.getItem("user");
-    return userStr ? JSON.parse(userStr) : null;
-  },
+        <Table.Column
+          dataIndex="entry_type"
+          title="Type"
+          render={(value) => (
+            <Tag color={getEntryTypeColor(value)}>
+              {getEntryTypeLabel(value)}
+            </Tag>
+          )}
+        />
+
+        <Table.Column
+          dataIndex="quantity"
+          title="Quantity"
+          render={(value, record: any) => (
+            <span>
+              <NumberField value={value} /> {record.products?.unit}
+            </span>
+          )}
+        />
+
+        <Table.Column
+          dataIndex="unit_price"
+          title="Unit Price"
+          render={(value) =>
+            value ? (
+              <NumberField
+                value={value}
+                options={{
+                  style: "currency",
+                  currency: "INR",
+                }}
+              />
+            ) : (
+              "-"
+            )
+          }
+        />
+
+        <Table.Column
+          dataIndex="created_at"
+          title="Date"
+          render={(value) => <DateField value={value} format="DD/MM/YYYY HH:mm" />}
+        />
+
+        <Table.Column dataIndex="notes" title="Notes" />
+      </Table>
+    </List>
+  );
 };
-
-// Products API
-export const productsAPI = {
-  list: async () => {
-    const response = await api.get("/products");
-    return response.data.data;
-  },
-
-  get: async (id: string) => {
-    const response = await api.get(`/products/${id}`);
-    return response.data.data;
-  },
-
-  create: async (product: any) => {
-    const response = await api.post("/products", product);
-    return response.data.data;
-  },
-
-  update: async (id: string, updates: any) => {
-    const response = await api.put(`/products/${id}`, updates);
-    return response.data.data;
-  },
-
-  delete: async (id: string) => {
-    await api.delete(`/products/${id}`);
-  },
-
-  getLowStock: async () => {
-    const response = await api.get("/products/alerts/low-stock");
-    return response.data.data;
-  },
-};
-
-// Stock API
-export const stockAPI = {
-  add: async (entry: any) => {
-    const response = await api.post("/stock", entry);
-    return response.data.data;
-  },
-
-  getHistory: async (productId: string) => {
-    const response = await api.get(`/stock/product/${productId}`);
-    return response.data.data;
-  },
-};
-
-export default api;
 ```
 
-#### Step 4: Create Types
+---
 
-Create file: `src/types/index.ts`
+### Step 4: Update App.tsx - Add Stock Entries (5 minutes)
+
+Edit `src/App.tsx` - add stock_entries resource:
 
 ```typescript
-export interface Product {
-  id: string;
-  name: string;
-  category?: string;
-  unit: string;
-  current_stock: number;
-  min_stock_threshold: number;
-  cost_price?: number;
-  selling_price?: number;
-  has_expiry: boolean;
-}
+// Add import
+import { StockEntryList, StockEntryCreate } from "./pages/stock_entries";
+import { HistoryOutlined } from "@ant-design/icons";
 
-export interface StockEntry {
-  product_id: string;
-  entry_type: "purchase" | "sale" | "adjustment" | "waste";
-  quantity: number;
-  unit_price?: number;
-  notes?: string;
-  entry_method?: string;
-}
+// In resources array, add:
+resources={[
+  {
+    name: "products",
+    list: "/products",
+    create: "/products/create",
+    edit: "/products/edit/:id",
+    show: "/products/show/:id",
+    meta: {
+      canDelete: true,
+      icon: <ShopOutlined />,
+    },
+  },
+  {
+    name: "stock_entries",
+    list: "/stock_entries",
+    create: "/stock_entries/create",
+    meta: {
+      label: "Stock History",
+      icon: <HistoryOutlined />,
+    },
+  },
+]}
 
-export interface User {
-  id: string;
-  phone: string;
-  business_name: string;
-  business_type?: string;
-}
+// In Routes, add:
+<Route path="/stock_entries">
+  <Route index element={<StockEntryList />} />
+  <Route path="create" element={<StockEntryCreate />} />
+</Route>
 ```
 
-#### Step 5: Create Login Screen
+---
 
-Create file: `src/screens/LoginScreen.tsx`
+### Step 5: Create index file (2 minutes)
+
+Create `src/pages/stock_entries/index.ts`:
+
+```typescript
+export { StockEntryList } from "./list";
+export { StockEntryCreate } from "./create";
+```
+
+---
+
+### Step 6: Test Stock Management (5 minutes)
+
+1. Go to http://localhost:5173
+2. Click "Stock History" in sidebar
+3. Click "Create" button
+4. Select a product (e.g., Tomato)
+5. Entry Type: Purchase
+6. Quantity: 10
+7. Unit Price: 30
+8. Click "Save"
+9. **Go to Products page - stock should increase!** 🎉
+
+Try:
+- ✅ Adding stock (purchase)
+- ✅ Removing stock (sale)
+- ✅ Check product page - stock updates automatically!
+- ✅ Create waste entry - stock decreases
+
+---
+
+### ✅ DAY 3 COMPLETE!
+
+**What you have:**
+- ✅ Stock entry form
+- ✅ Stock history list
+- ✅ Automatic stock updates (database triggers working!)
+- ✅ Purchase/Sale/Waste tracking
+
+**Total time: ~50 minutes!**
+
+---
+
+## 5. DAY 4: DASHBOARD & REPORTS
+
+### Step 1: Create Dashboard (30 minutes)
+
+Create `src/pages/dashboard/index.tsx`:
+
+```typescript
+import React from "react";
+import { useList } from "@refinedev/core";
+import { Row, Col, Card, Statistic, Table, Tag } from "antd";
+import {
+  ShoppingCartOutlined,
+  WarningOutlined,
+  DollarOutlined,
+  DropboxOutlined,
+} from "@ant-design/icons";
+
+export const Dashboard: React.FC = () => {
+  // Get all products
+  const { data: productsData } = useList({
+    resource: "products",
+  });
+
+  const products = productsData?.data || [];
+
+  // Calculate statistics
+  const totalProducts = products.length;
+  const lowStockProducts = products.filter(
+    (p: any) => p.current_stock <= p.min_stock_threshold
+  );
+  const totalStockValue = products.reduce(
+    (sum: number, p: any) => sum + (p.current_stock * (p.cost_price || 0)),
+    0
+  );
+  const outOfStock = products.filter((p: any) => p.current_stock === 0);
+
+  return (
+    <div style={{ padding: "24px" }}>
+      <h1>Dashboard</h1>
+
+      {/* Statistics Cards */}
+      <Row gutter={[16, 16]}>
+        <Col xs={24} sm={12} lg={6}>
+          <Card>
+            <Statistic
+              title="Total Products"
+              value={totalProducts}
+              prefix={<ShoppingCartOutlined />}
+            />
+          </Card>
+        </Col>
+
+        <Col xs={24} sm={12} lg={6}>
+          <Card>
+            <Statistic
+              title="Low Stock Items"
+              value={lowStockProducts.length}
+              prefix={<WarningOutlined />}
+              valueStyle={{ color: lowStockProducts.length > 0 ? "#cf1322" : undefined }}
+            />
+          </Card>
+        </Col>
+
+        <Col xs={24} sm={12} lg={6}>
+          <Card>
+            <Statistic
+              title="Out of Stock"
+              value={outOfStock.length}
+              prefix={<DropboxOutlined />}
+              valueStyle={{ color: outOfStock.length > 0 ? "#cf1322" : undefined }}
+            />
+          </Card>
+        </Col>
+
+        <Col xs={24} sm={12} lg={6}>
+          <Card>
+            <Statistic
+              title="Stock Value"
+              value={totalStockValue}
+              prefix={<DollarOutlined />}
+              precision={0}
+              prefix="₹"
+            />
+          </Card>
+        </Col>
+      </Row>
+
+      {/* Low Stock Products Table */}
+      {lowStockProducts.length > 0 && (
+        <Card
+          title="⚠️ Low Stock Alert"
+          style={{ marginTop: 24 }}
+        >
+          <Table
+            dataSource={lowStockProducts}
+            rowKey="id"
+            pagination={false}
+          >
+            <Table.Column dataIndex="name" title="Product" />
+            <Table.Column
+              dataIndex="current_stock"
+              title="Current Stock"
+              render={(value, record: any) => (
+                <span>
+                  {value} {record.unit}
+                  <Tag color="red" style={{ marginLeft: 8 }}>Low</Tag>
+                </span>
+              )}
+            />
+            <Table.Column
+              dataIndex="min_stock_threshold"
+              title="Min Required"
+              render={(value, record: any) => `${value} ${record.unit}`}
+            />
+          </Table>
+        </Card>
+      )}
+
+      {/* Recent Stock Movements */}
+      <Card
+        title="Recent Activity"
+        style={{ marginTop: 24 }}
+      >
+        <RecentStockMovements />
+      </Card>
+    </div>
+  );
+};
+
+// Recent Stock Movements Component
+const RecentStockMovements: React.FC = () => {
+  const { data } = useList({
+    resource: "stock_entries",
+    pagination: { pageSize: 10 },
+    sorters: [{ field: "created_at", order: "desc" }],
+    meta: {
+      select: "*, products(name, unit)",
+    },
+  });
+
+  const entries = data?.data || [];
+
+  const getTypeColor = (type: string) => {
+    switch (type) {
+      case "purchase": return "green";
+      case "sale": return "blue";
+      case "adjustment": return "orange";
+      case "waste": return "red";
+      default: return "default";
+    }
+  };
+
+  return (
+    <Table
+      dataSource={entries}
+      rowKey="id"
+      pagination={false}
+      size="small"
+    >
+      <Table.Column
+        dataIndex={["products", "name"]}
+        title="Product"
+      />
+      <Table.Column
+        dataIndex="entry_type"
+        title="Type"
+        render={(value) => (
+          <Tag color={getTypeColor(value)}>
+            {value.charAt(0).toUpperCase() + value.slice(1)}
+          </Tag>
+        )}
+      />
+      <Table.Column
+        dataIndex="quantity"
+        title="Quantity"
+        render={(value, record: any) => `${value} ${record.products?.unit}`}
+      />
+      <Table.Column
+        dataIndex="created_at"
+        title="Date"
+        render={(value) => new Date(value).toLocaleDateString()}
+      />
+    </Table>
+  );
+};
+```
+
+---
+
+### Step 2: Update App.tsx - Add Dashboard Route (5 minutes)
+
+Edit `src/App.tsx`:
+
+```typescript
+// Add import
+import { Dashboard } from "./pages/dashboard";
+
+// Update <Route index> to show Dashboard
+<Route index element={<Dashboard />} />
+
+// Or update to redirect:
+<Route index element={<Navigate to="/dashboard" />} />
+
+// Add dashboard route:
+<Route path="/dashboard" element={<Dashboard />} />
+```
+
+---
+
+### Step 3: Test Dashboard (2 minutes)
+
+1. Go to http://localhost:5173
+2. You should see dashboard with:
+   - Total products count
+   - Low stock items count
+   - Stock value
+   - Low stock alerts table
+   - Recent activity
+
+---
+
+### ✅ DAY 4 COMPLETE!
+
+**What you have:**
+- ✅ Dashboard with key metrics
+- ✅ Low stock alerts highlighted
+- ✅ Stock value calculation
+- ✅ Recent activity feed
+
+**Total time: ~40 minutes!**
+
+---
+
+## 6. DAY 5: VOICE INPUT & PWA
+
+### Step 1: Add Voice Input to Stock Entry (30 minutes)
+
+Edit `src/pages/stock_entries/create.tsx` - add voice functionality:
 
 ```typescript
 import React, { useState } from "react";
-import { View, StyleSheet, Alert } from "react-native";
-import { TextInput, Button, Title } from "react-native-paper";
-import { authAPI } from "../services/api";
+import { Create, useForm, useSelect } from "@refinedev/antd";
+import { Form, Input, InputNumber, Select, DatePicker, Button, message } from "antd";
+import { AudioOutlined } from "@ant-design/icons";
 
-export default function LoginScreen({ navigation }: any) {
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+export const StockEntryCreate: React.FC = () => {
+  const { formProps, saveButtonProps, form } = useForm({
+    resource: "stock_entries",
+  });
 
-  const handleLogin = async () => {
-    if (!phone || !password) {
-      Alert.alert("Error", "Please enter phone and password");
+  const { selectProps: productSelectProps } = useSelect({
+    resource: "products",
+    optionLabel: "name",
+    optionValue: "id",
+  });
+
+  const [isListening, setIsListening] = useState(false);
+
+  // Voice input handler
+  const handleVoiceInput = () => {
+    // Check browser support
+    const SpeechRecognition =
+      (window as any).SpeechRecognition ||
+      (window as any).webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      message.error("Voice input not supported in this browser");
       return;
     }
 
-    setLoading(true);
-    try {
-      await authAPI.login(phone, password);
-      // Navigate to home screen
-      navigation.replace("Home");
-    } catch (error: any) {
-      Alert.alert(
-        "Login Failed",
-        error.response?.data?.error || "Invalid credentials"
-      );
-    } finally {
-      setLoading(false);
+    const recognition = new SpeechRecognition();
+    recognition.lang = "ta-IN"; // Tamil
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    recognition.onstart = () => {
+      setIsListening(true);
+      message.info("Listening... Speak now!");
+    };
+
+    recognition.onresult = (event: any) => {
+      const transcript = event.results[0][0].transcript.toLowerCase();
+      message.success(`Heard: ${transcript}`);
+
+      // Parse voice command
+      // Example: "tomato 10 kg purchase"
+      parseVoiceCommand(transcript);
+    };
+
+    recognition.onerror = (event: any) => {
+      message.error(`Error: ${event.error}`);
+      setIsListening(false);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+    };
+
+    recognition.start();
+  };
+
+  const parseVoiceCommand = (transcript: string) => {
+    // Simple parsing logic
+    // Format: "product_name quantity unit entry_type"
+    // Example: "tomato 10 kg purchase"
+
+    const words = transcript.split(" ");
+
+    // Extract quantity (first number found)
+    const quantityMatch = transcript.match(/\d+(\.\d+)?/);
+    if (quantityMatch) {
+      form?.setFieldsValue({ quantity: parseFloat(quantityMatch[0]) });
     }
+
+    // Extract entry type
+    if (transcript.includes("purchase") || transcript.includes("buy")) {
+      form?.setFieldsValue({ entry_type: "purchase" });
+    } else if (transcript.includes("sale") || transcript.includes("sell")) {
+      form?.setFieldsValue({ entry_type: "sale" });
+    }
+
+    message.info("Voice command processed! Please verify and submit.");
   };
 
   return (
-    <View style={styles.container}>
-      <Title style={styles.title}>LocalBusinessOS</Title>
+    <Create saveButtonProps={saveButtonProps}>
+      <Form {...formProps} layout="vertical">
+        {/* Voice Input Button */}
+        <Form.Item>
+          <Button
+            type="primary"
+            icon={<AudioOutlined />}
+            onClick={handleVoiceInput}
+            loading={isListening}
+            block
+            size="large"
+            danger={isListening}
+          >
+            {isListening ? "Listening..." : "🎤 Voice Input (Tamil)"}
+          </Button>
+        </Form.Item>
 
-      <TextInput
-        label="Phone Number"
-        value={phone}
-        onChangeText={setPhone}
-        keyboardType="phone-pad"
-        style={styles.input}
-        mode="outlined"
-      />
+        <Form.Item
+          label="Product"
+          name="product_id"
+          rules={[{ required: true }]}
+        >
+          <Select {...productSelectProps} showSearch placeholder="Select product" />
+        </Form.Item>
 
-      <TextInput
-        label="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        style={styles.input}
-        mode="outlined"
-      />
+        <Form.Item label="Entry Type" name="entry_type" rules={[{ required: true }]}>
+          <Select>
+            <Select.Option value="purchase">Purchase</Select.Option>
+            <Select.Option value="sale">Sale</Select.Option>
+            <Select.Option value="adjustment">Adjustment</Select.Option>
+            <Select.Option value="waste">Waste</Select.Option>
+          </Select>
+        </Form.Item>
 
-      <Button
-        mode="contained"
-        onPress={handleLogin}
-        loading={loading}
-        disabled={loading}
-        style={styles.button}
-      >
-        Login
-      </Button>
+        <Form.Item label="Quantity" name="quantity" rules={[{ required: true }]}>
+          <InputNumber min={0.01} step={0.01} style={{ width: "100%" }} />
+        </Form.Item>
 
-      <Button
-        mode="text"
-        onPress={() => navigation.navigate("Signup")}
-        style={styles.signupButton}
-      >
-        Don't have an account? Sign up
-      </Button>
-    </View>
+        <Form.Item label="Unit Price (₹)" name="unit_price">
+          <InputNumber min={0} style={{ width: "100%" }} prefix="₹" />
+        </Form.Item>
+
+        <Form.Item label="Notes" name="notes">
+          <Input.TextArea rows={2} />
+        </Form.Item>
+
+        <Form.Item name="entry_method" initialValue="voice" hidden>
+          <Input />
+        </Form.Item>
+      </Form>
+    </Create>
   );
-}
+};
+```
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    justifyContent: "center",
-    backgroundColor: "#fff",
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 40,
-  },
-  input: {
-    marginBottom: 15,
-  },
-  button: {
-    marginTop: 10,
-    paddingVertical: 5,
-  },
-  signupButton: {
-    marginTop: 15,
-  },
+---
+
+### Step 2: Make it a PWA (20 minutes)
+
+#### 2.1 Install vite-plugin-pwa
+
+```bash
+npm install vite-plugin-pwa -D
+```
+
+#### 2.2 Update vite.config.ts
+
+```typescript
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import { VitePWA } from "vite-plugin-pwa";
+
+export default defineConfig({
+  plugins: [
+    react(),
+    VitePWA({
+      registerType: "autoUpdate",
+      includeAssets: ["favicon.ico", "apple-touch-icon.png"],
+      manifest: {
+        name: "LocalBusinessOS",
+        short_name: "ShopMate",
+        description: "Inventory management for small retailers",
+        theme_color: "#1890ff",
+        background_color: "#ffffff",
+        display: "standalone",
+        start_url: "/",
+        icons: [
+          {
+            src: "/icon-192.png",
+            sizes: "192x192",
+            type: "image/png",
+          },
+          {
+            src: "/icon-512.png",
+            sizes: "512x512",
+            type: "image/png",
+          },
+        ],
+      },
+      workbox: {
+        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/.*\.supabase\.co\/.*/i,
+            handler: "NetworkFirst",
+            options: {
+              cacheName: "supabase-cache",
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 60 * 60 * 24, // 1 day
+              },
+            },
+          },
+        ],
+      },
+    }),
+  ],
 });
 ```
 
-#### Step 6: Create Home Screen
+#### 2.3 Add Icons
 
-Create file: `src/screens/HomeScreen.tsx`
+Create icons (or use placeholder):
+- `public/icon-192.png` (192x192px)
+- `public/icon-512.png` (512x512px)
 
-```typescript
-import React, { useState, useEffect } from "react";
-import { View, FlatList, StyleSheet, RefreshControl } from "react-native";
-import { Card, Title, Paragraph, FAB, Chip } from "react-native-paper";
-import { productsAPI } from "../services/api";
-import { Product } from "../types";
-
-export default function HomeScreen({ navigation }: any) {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [refreshing, setRefreshing] = useState(false);
-
-  const loadProducts = async () => {
-    try {
-      const data = await productsAPI.list();
-      setProducts(data);
-    } catch (error) {
-      console.error("Error loading products:", error);
-    }
-  };
-
-  useEffect(() => {
-    loadProducts();
-  }, []);
-
-  const onRefresh = async () => {
-    setRefreshing(true);
-    await loadProducts();
-    setRefreshing(false);
-  };
-
-  const renderProduct = ({ item }: { item: Product }) => {
-    const isLowStock = item.current_stock <= item.min_stock_threshold;
-
-    return (
-      <Card
-        style={styles.card}
-        onPress={() => navigation.navigate("ProductDetail", { product: item })}
-      >
-        <Card.Content>
-          <View style={styles.cardHeader}>
-            <Title>{item.name}</Title>
-            {isLowStock && (
-              <Chip
-                mode="flat"
-                textStyle={styles.lowStockText}
-                style={styles.lowStockChip}
-              >
-                Low Stock
-              </Chip>
-            )}
-          </View>
-          <Paragraph>
-            Stock: {item.current_stock} {item.unit}
-          </Paragraph>
-          <Paragraph style={styles.threshold}>
-            Min: {item.min_stock_threshold} {item.unit}
-          </Paragraph>
-        </Card.Content>
-      </Card>
-    );
-  };
-
-  return (
-    <View style={styles.container}>
-      <FlatList
-        data={products}
-        renderItem={renderProduct}
-        keyExtractor={(item) => item.id}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-        ListEmptyComponent={
-          <View style={styles.empty}>
-            <Title>No products yet</Title>
-            <Paragraph>Tap + to add your first product</Paragraph>
-          </View>
-        }
-      />
-
-      <FAB
-        style={styles.fab}
-        icon="plus"
-        onPress={() => navigation.navigate("AddProduct")}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f5f5f5",
-  },
-  card: {
-    margin: 10,
-    elevation: 2,
-  },
-  cardHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  lowStockChip: {
-    backgroundColor: "#ffebee",
-  },
-  lowStockText: {
-    color: "#c62828",
-    fontSize: 12,
-  },
-  threshold: {
-    color: "#666",
-    fontSize: 12,
-  },
-  fab: {
-    position: "absolute",
-    margin: 16,
-    right: 0,
-    bottom: 0,
-  },
-  empty: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 100,
-  },
-});
-```
-
-#### Step 7: Create Navigation
-
-Create file: `src/navigation/AppNavigator.tsx`
-
-```typescript
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import LoginScreen from "../screens/LoginScreen";
-import HomeScreen from "../screens/HomeScreen";
-
-const Stack = createStackNavigator();
-
-export default function AppNavigator() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ title: "My Products" }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-```
-
-#### Step 8: Update App.tsx
-
-Replace contents of `App.tsx`:
-
-```typescript
-import React from "react";
-import { Provider as PaperProvider } from "react-native-paper";
-import AppNavigator from "./src/navigation/AppNavigator";
-
-export default function App() {
-  return (
-    <PaperProvider>
-      <AppNavigator />
-    </PaperProvider>
-  );
-}
-```
-
-#### Step 9: Test Mobile App
-
-```bash
-# Make sure backend is running on your Mac
-cd ~/shopmate/backend
-npm run dev
-
-# In another terminal, start mobile app
-cd ~/shopmate/mobile
-npx expo start
-
-# Scan QR code with Expo Go app on your phone
-# Or press 'i' for iOS simulator, 'a' for Android emulator
-```
-
-**⚠️ IMPORTANT:** Update `API_URL` in `src/services/api.ts` with your Mac's IP address!
-
-```bash
-# Find your IP:
-ifconfig | grep "inet " | grep -v 127.0.0.1
-
-# Use that IP in api.ts:
-const API_URL = 'http://YOUR_IP_HERE:3000/api';
-```
-
-✅ **You should see login screen! Try logging in with your test account!**
+You can generate icons at: https://www.favicon-generator.org/
 
 ---
 
-## 6. WEEK 7-8: VOICE & TESTING
-
-### Voice Integration (Optional - Can add in Phase 2)
-
-**For MVP, you can skip voice and add it later!**
-
-**Simple alternative:** Just use text input for now. Voice is complex and can be added after you have customers.
-
----
-
-### Day 18-21: Testing & Polish
-
-#### Checklist:
-
-- [ ] Backend APIs all working
-- [ ] Mobile app can login
-- [ ] Can create products
-- [ ] Can view products list
-- [ ] Can add stock entries
-- [ ] Stock levels update automatically
-- [ ] Low stock products show badge
-- [ ] App works offline (test by turning off WiFi)
-
-#### Common Issues & Fixes:
-
-**Issue: "Network Error" in mobile app**
-
-- Fix: Check API_URL has correct IP address
-- Fix: Make sure backend is running (`npm run dev`)
-- Fix: Check firewall isn't blocking port 3000
-
-**Issue: "Invalid token" error**
-
-- Fix: Login again to get fresh token
-- Fix: Check Authorization header format
-
-**Issue: Products not showing**
-
-- Fix: Check you're logged in as the right user
-- Fix: Try creating a product first
-
----
-
-## 7. DEPLOYMENT
-
-### Deploy Backend to Railway
-
-#### Step 1: Prepare for Deployment
+### Step 3: Test Voice & PWA (5 minutes)
 
 ```bash
-cd ~/shopmate/backend
+# Build for production to test PWA
+npm run build
+npm run preview
+
+# Open: http://localhost:4173
+```
+
+Test:
+1. ✅ Click voice button on stock entry page
+2. ✅ Say: "tomato 10 kg purchase"
+3. ✅ Check if form fills automatically
+4. ✅ On mobile: Add to home screen
+5. ✅ Works like native app!
+
+---
+
+### ✅ DAY 5 COMPLETE!
+
+**What you have:**
+- ✅ Voice input (Tamil) for stock entries
+- ✅ PWA (installable on mobile)
+- ✅ Works offline
+- ✅ Fast and responsive
+
+**Total time: ~55 minutes!**
+
+---
+
+## 7. DAY 6: TESTING & POLISH
+
+### Checklist:
+
+- [ ] All products CRUD working
+- [ ] Stock entries creating successfully
+- [ ] Stock levels updating automatically
+- [ ] Low stock alerts showing
+- [ ] Dashboard displaying correctly
+- [ ] Voice input working (in supported browsers)
+- [ ] PWA installable
+- [ ] Mobile responsive
+
+### Test on Real Phone:
+
+1. Deploy to Vercel (see Day 7)
+2. Open URL on phone
+3. Add to home screen
+4. Test all features
+
+---
+
+## 8. DAY 7: DEPLOY & LAUNCH
+
+### Step 1: Push to GitHub (5 minutes)
+
+```bash
+cd ~/shopmate/shopmate-web
+
+# Initialize git (if not already)
+git init
 
 # Create .gitignore
 cat > .gitignore << 'EOF'
-node_modules/
-dist/
+node_modules
+dist
 .env
-*.log
+.env.local
+.DS_Store
 EOF
 
-# Initialize git
-git init
+# Commit
 git add .
-git commit -m "Initial commit"
-```
+git commit -m "Initial commit - LocalBusinessOS"
 
-#### Step 2: Deploy to Railway
-
-```bash
-# Install Railway CLI
-npm install -g @railway/cli
-
-# Login to Railway
-railway login
-
-# Initialize project
-railway init
-
-# Add environment variables in Railway dashboard:
-# - SUPABASE_URL
-# - SUPABASE_ANON_KEY
-# - SUPABASE_SERVICE_KEY
-# - NODE_ENV=production
-
-# Deploy
-railway up
-```
-
-Railway will give you a URL like: `https://your-app.railway.app`
-
-#### Step 3: Update Mobile App API URL
-
-Update `src/services/api.ts`:
-
-```typescript
-const API_URL = "https://your-app.railway.app/api";
+# Create repo on GitHub, then:
+git remote add origin https://github.com/YOUR_USERNAME/shopmate-web.git
+git branch -M main
+git push -u origin main
 ```
 
 ---
 
-### Build Mobile App
+### Step 2: Deploy to Vercel (5 minutes)
 
-#### For Testing (Development Build):
+1. Go to https://vercel.com
+2. Sign in with GitHub
+3. Click "New Project"
+4. Import your repository
+5. Add environment variables:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_KEY`
+6. Click "Deploy"
 
-```bash
-cd ~/shopmate/mobile
+**Wait 2-3 minutes → Your app is LIVE!** 🎉
 
-# Android APK
-eas build --platform android --profile preview
-
-# iOS (requires Apple Developer account)
-eas build --platform ios --profile preview
-```
-
-#### For Production:
-
-```bash
-# Configure EAS
-eas build:configure
-
-# Build production APK
-eas build --platform android --profile production
-```
-
-Download the APK and install on Android phones for testing!
+You get a URL like: `https://shopmate-web.vercel.app`
 
 ---
 
-## 8. GETTING FIRST CUSTOMERS
+### Step 3: Test Production App (5 minutes)
 
-### Week 9+: Customer Acquisition
+1. Open your Vercel URL
+2. Create account
+3. Add products
+4. Add stock entries
+5. Check dashboard
+6. Test on mobile phone
+7. Add to home screen
 
-#### Day 1-3: Visit 20 Shops
+**IT WORKS!** 🚀
+
+---
+
+### ✅ DAY 7 COMPLETE!
+
+**What you have:**
+- ✅ Production app deployed
+- ✅ Public URL to share
+- ✅ Works on any device
+- ✅ Ready for customers!
+
+**Total time: ~15 minutes!**
+
+---
+
+## 9. WEEK 2+: GET CUSTOMERS
+
+### Your Customer Acquisition Plan
+
+#### Week 2: Visit 20 Shops
 
 **Script (Tamil):**
-
 ```
 "Vanakkam Anna/Akka,
 
-Naan software engineer. Small kadaikaaranga-ku oru simple app
-panren - inventory track panna, low stock alert koduka.
+Naan software engineer. Small kadaikaaranga-ku oru app panren.
 
-Voice la update pannalam: "Tomato 5kg add pannu"
-Automatic-a low stock WhatsApp message varumpaan kada mukiyathana samaan mudinjiruppagannu theriyum..
+Voice la stock update pannalam - phone la open pannunga,
+button click pannunga, 'Tomato 10 kg purchase' nu sollunga - 
+automatic-a entry aayidum!
 
-₹300/month. First month completely free. Try pannunga?"
+Low stock WhatsApp alert varum.
+
+Try pannunga - completely free for 1 month. Pidichcha, 
+₹300/month continue pannunga. Phone browser-la work aagum, 
+app install panna vendam."
+
+(Show them the app on your phone)
 ```
 
-**Goal:** Get 10 people to say "YES, I'll try"
+**Goal:** 10 shops say "YES"
 
-#### Day 4-7: Install & Train
+#### Week 3: Train & Support
 
 Visit each shop:
-
-1. Install app on their phone (5 min)
+1. Open app on their phone browser
 2. Create account (2 min)
-3. Add 10 products (10 min)
-4. Show how to add stock (5 min)
-5. Show WhatsApp alerts (3 min)
-6. **Total: 25 minutes per shop**
+3. Add to home screen (1 min)
+4. Add 5-10 products (5 min)
+5. Show stock entry (2 min)
+6. Show voice input (2 min)
+7. Exchange phone number for support
 
-#### Week 2-3: Follow Up
-
-Visit each shop weekly:
-
-- "Epdi iruku? (How is it?)"
-- "Enna problem?" (Any problems?)
-- "Enna feature venum?" (What features needed?)
+**Daily:** Answer their WhatsApp questions
 
 #### Week 4: Convert to Paid
 
-"First month free mudinjudu. Romba useful-a irukunu solringa.
-Ipo ₹300/month - oru naal ku ₹10. Continue pannuringala?"
+"Anna, 1 month free use panninga. Useful-a irukka?
+Ipo monthly ₹300 - oru naal ku ₹10 dhaan.
+Continue pannuringala?"
 
-**Goal:** 50% conversion (5 paying customers)
-
----
-
-## 9. PHASE 2 FEATURES (After Getting 10+ Customers)
-
-### What to Add Next:
-
-1. **Voice Input** (Week 10-11)
-
-   - Integrate Google Cloud Speech-to-Text
-   - Add Tamil voice commands
-
-2. **WhatsApp Automation** (Week 12)
-
-   - Daily stock reports at 9 AM
-   - Low stock alerts
-   - Weekly summary
-
-3. **Expiry Date Management** (Week 13-14)
-
-   - Track expiry dates for medicines/food
-   - Alert 7 days before expiry
-   - FEFO (First Expiry First Out) logic
-
-4. **Basic Reports** (Week 15)
-
-   - Sales summary
-   - Stock movement
-   - Profit/loss by product
-
-5. **Multi-Location** (Week 16+)
-   - For shops with branches
-   - Stock transfer between locations
+**Goal:** 5 paying customers = ₹1,500 MRR
 
 ---
 
@@ -2000,150 +1835,118 @@ Ipo ₹300/month - oru naal ku ₹10. Continue pannuringala?"
 
 ### Common Issues:
 
-**Backend won't start:**
+**Issue: "Unauthorized" errors**
+- Check: .env file has correct Supabase URL and key
+- Check: RLS policies enabled in Supabase
+- Try: Login again
+
+**Issue: Stock not updating**
+- Check: Database triggers created (see Day 1, Step 1.2)
+- Check: Supabase dashboard → Database → Tables → products
+- Manually run: `SELECT * FROM products;` in SQL Editor
+
+**Issue: Voice not working**
+- Voice only works on HTTPS (not localhost)
+- After deploying to Vercel, test voice on production URL
+- Or use: Chrome/Edge (has best support)
+
+**Issue: PWA not installing**
+- Need HTTPS (works on Vercel, not localhost)
+- Check: manifest.json has icons
+- Check: Service worker registered
+
+---
+
+## 11. WHAT'S NEXT?
+
+### Phase 2 Features (After Getting 10+ Customers):
+
+1. **WhatsApp Automation** (use n8n)
+   - Daily reports
+   - Low stock alerts
+   - Weekly summary
+
+2. **Multi-language Support**
+   - Add Hindi, Telugu
+   - Use i18n
+
+3. **Advanced Reports**
+   - Sales by category
+   - Profit/loss
+   - Stock movement trends
+
+4. **Expiry Management**
+   - Track expiry dates
+   - Alert 7 days before
+   - FEFO sorting
+
+5. **Multi-location**
+   - For shops with branches
+   - Stock transfer
+
+---
+
+## 12. CONGRATULATIONS! 🎉
+
+### You Built a Production App in 1 Week!
+
+**What you have:**
+- ✅ Web app (works on mobile + desktop)
+- ✅ Authentication
+- ✅ Products management
+- ✅ Stock tracking
+- ✅ Dashboard with analytics
+- ✅ Voice input (Tamil)
+- ✅ PWA (installable)
+- ✅ Deployed on Vercel
+- ✅ Public URL to share
+
+**Total development time:** ~6-8 hours (instead of 8 weeks!)
+
+**Cost:** ₹0 (completely free!)
+
+---
+
+## 13. QUICK COMMAND REFERENCE
 
 ```bash
-# Check node version
-node --version  # Should be 18+
+# Start development server
+cd ~/shopmate/shopmate-web
+npm run dev
 
-# Reinstall dependencies
-rm -rf node_modules package-lock.json
-npm install
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+
+# Deploy to Vercel
+vercel --prod
+
+# Check Supabase connection
+# Open browser console and run:
+# console.log(import.meta.env.VITE_SUPABASE_URL)
 ```
 
-**Database connection fails:**
+---
 
-- Check .env file has correct Supabase URL and keys
-- Check Supabase project is active (not paused)
+## 14. SUPPORT & RESOURCES
 
-**Mobile app won't connect:**
-
-- Check API_URL has correct IP
-- Check backend is running
-- Try pinging: `curl http://YOUR_IP:3000/health`
-
-**Can't scan QR code:**
-
-- Make sure phone and Mac on same WiFi
-- Try USB connection: `npx expo start --tunnel`
+**Refine Docs:** https://refine.dev/docs  
+**Supabase Docs:** https://supabase.com/docs  
+**Ant Design:** https://ant.design/components  
 
 ---
 
-## 11. FINAL CHECKLIST
-
-### MVP Complete When You Have:
-
-- [x] Backend API deployed and running
-- [x] Mobile app builds successfully
-- [x] Can signup/login
-- [x] Can add products
-- [x] Can update stock
-- [x] Can see product list
-- [x] Low stock shows badge
-- [x] Works offline
-- [x] Tested on real phone
-- [x] 10 shops using it
-- [x] 5 paying customers (₹1,500 MRR)
-
----
-
-## 12. NEXT STEPS
-
-### You now have:
-
-✅ Working MVP  
-✅ 5-10 paying customers  
-✅ ₹1,500-3,000 monthly revenue  
-✅ Product-market fit validation
-
-### What to do:
-
-**Option A:** Scale to 100 customers (part-time)
-
-- Hire 1 sales person (₹15K/month + commission)
-- Target: 20 new customers/month
-- Timeline: 6 months to 100 customers
-
-**Option B:** Raise funding
-
-- Create pitch deck
-- Apply to accelerators (Y Combinator, Sequoia Surge)
-- Target: ₹50L-1Cr seed round
-
-**Option C:** Continue bootstrapping
-
-- Keep your job
-- Grow organically to 500 customers
-- Quit when MRR crosses ₹1.5L (18 months)
-
----
-
-## 13. SUPPORT & HELP
-
-### If You Get Stuck:
-
-**Backend Issues:**
-
-- Check server logs: `npm run dev` output
-- Check Supabase logs in dashboard
-- Test APIs with Postman/curl
-
-**Mobile Issues:**
-
-- Check Expo errors in terminal
-- Check React Native debugger
-- Console.log everything!
-
-**Database Issues:**
-
-- Check Supabase dashboard → Database → Tables
-- Run queries in SQL Editor
-- Check RLS policies
-
----
-
-## CONGRATULATIONS! 🎉
-
-**You now have a complete guide to build LocalBusinessOS from scratch!**
+**YOU DID IT! NOW GO GET CUSTOMERS!** 🚀
 
 **Remember:**
+- Show shop owners the app
+- Explain benefits (voice, alerts, easy)
+- First month free
+- ₹300/month after
+- WhatsApp support
 
-- Start simple (MVP features only)
-- Talk to customers weekly
-- Don't build features nobody asks for
-- Focus on getting 10 paying customers first
-- Then add more features
+**Target:** 10 customers in 2 weeks = ₹3,000 MRR
 
-**You can do this!** 💪
-
----
-
-## QUICK COMMAND REFERENCE
-
-```bash
-# Start backend
-cd ~/shopmate/backend && npm run dev
-
-# Start mobile app
-cd ~/shopmate/mobile && npx expo start
-
-# Check backend health
-curl http://localhost:3000/health
-
-# Test database
-psql -h YOUR_SUPABASE_HOST -U postgres -d postgres
-
-# Deploy to Railway
-railway up
-
-# Build Android APK
-eas build --platform android
-```
-
----
-
-**Total Time:** 8 weeks part-time (20-30 hours/week)  
-**Total Cost:** ₹0-₹10,000  
-**Result:** Production app with paying customers!
-
-**NOW GO BUILD IT!** 🚀
+**YOU CAN DO THIS!** 💪
